@@ -44,6 +44,7 @@ public:
     QLineEdit *lineEdit_10;
     QHBoxLayout *horizontalLayout_11;
     QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
     QPushButton *pushButton;
 
     void setupUi(QWidget *MyWidget)
@@ -137,6 +138,11 @@ public:
 
         horizontalLayout_11->addWidget(pushButton_2);
 
+        pushButton_3 = new QPushButton(MyWidget);
+        pushButton_3->setObjectName("pushButton_3");
+
+        horizontalLayout_11->addWidget(pushButton_3);
+
         pushButton = new QPushButton(MyWidget);
         pushButton->setObjectName("pushButton");
 
@@ -162,6 +168,7 @@ public:
         label_9->setText(QCoreApplication::translate("MyWidget", "\345\247\223\345\220\215\357\274\232", nullptr));
         label_10->setText(QCoreApplication::translate("MyWidget", "\351\233\273\350\251\261\357\274\232", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MyWidget", "\346\226\260\345\242\236", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MyWidget", "\345\214\257\345\205\245", nullptr));
         pushButton->setText(QCoreApplication::translate("MyWidget", "\345\214\257\345\207\272", nullptr));
     } // retranslateUi
 

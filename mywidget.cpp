@@ -1,4 +1,4 @@
-#include "mywidget.h"
+﻿#include "mywidget.h"
 #include "ui_mywidget.h"
 
 #include <QFile>
@@ -75,3 +75,50 @@ void MyWidget::on_pushButton_clicked()
     Write(mFilename,saveFile);
 }
 
+
+void MyWidget::on_pushButton_3_clicked()
+{
+    QString mFilename = QFileDialog::getOpenFileName(this, "匯入通訊錄");
+
+    if (mFilename.isEmpty()) {
+        return;
+    }
+
+    QFile file(mFilename);
+
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return;
+    }
+
+    QTextStream in(&file);
+    QStringList lines;
+
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        if (!line.trimmed().isEmpty()) {
+            lines.append(line);
+        }
+    }
+    file.close();
+
+    if (lines.isEmpty()) {
+        return;
+    }
+
+    int rowCount = lines.size();
+    int colCount = 0;
+
+    QStringList firstRowCols = lines.at(0).split(',');
+    colCount = firstRowCols.size();
+
+    ui->tableWidget->setRowCount(rowCount);
+    ui->tableWidget->setColumnCount(colCount);
+
+    for (int i = 0; i < rowCount; ++i) {
+        QStringList cols = lines.at(i).split(',');
+        for (int j = 0; j < cols.size() && j < colCount; ++j) {
+            QTableWidgetItem *item = new QTableWidgetItem(cols.at(j));
+            ui->tableWidget->setItem(i, j, item);
+        }
+    }
+}
